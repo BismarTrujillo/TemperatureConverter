@@ -19,13 +19,23 @@ function calculateBtnOnClick() {
     let interestAsNumber = Number(interestField.value);
     let yearsAsNumber = Number(yearsField.value);
     //variables for clean formula 
-    let interestMontlyPercent = interestAsNumber * (100 / 12);
+    let interestMontlyPercent = interestAsNumber / 100 / 12;
     let yearsInMoths = yearsAsNumber * 12;
     //Mortgage formula --> M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1].
-    let moPayment = loanAsNumber(interestMontlyPercent * (1 + interestMontlyPercent) ^ (yearsInMoths)) / ((1 + interestMontlyPercent) ^ (yearsInMoths) - 1);
 
-    const mopaymentField = document.getElementById("mopaymentField");
+    //let moPayment = loanAsNumber*(interestMontlyPercent * (1 + interestMontlyPercent) ^ (yearsInMoths)) / ((1 + interestMontlyPercent) ^ (yearsInMoths) - 1);
+    let moPayment = loanAsNumber * (interestMontlyPercent * (Math.pow(1 + interestMontlyPercent, yearsInMoths))) / (Math.pow(1+interestMontlyPercent,yearsInMoths)-1);
+    //function monthlyPayment(p, n, i) {
+  //eturn p * i * (Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
+//}
+   
+console.log(moPayment + " mo pament");
+console.log(loanAsNumber + " loan as number");
+console.log(interestMontlyPercent + " insterest montly percent");
+console.log(yearsInMoths + " years in months");
 
-    mopaymentField.value = moPayment;
+const mopaymentField = document.getElementById("mopaymentField");
+
+    mopaymentField.value = moPayment.toFixed(2);
 
 }
